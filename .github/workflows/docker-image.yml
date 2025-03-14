@@ -1,0 +1,64 @@
+name: Docker CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on push to the 'main' branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}  # Docker Hub username stored in GitHub Secrets
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Docker Hub password stored in GitHub Secrets
+
+      # Step 3: Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/nuxt:latest .
+
+      # Step 4: Push the Docker image to Docker Hub
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/nuxt:latest
+name: Docker CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on push to the 'main' branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}  # Docker Hub username stored in GitHub Secrets
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Docker Hub password stored in GitHub Secrets
+
+      # Step 3: Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/nuxt:latest .
+
+      # Step 4: Push the Docker image to Docker Hub
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/nuxt:latest
